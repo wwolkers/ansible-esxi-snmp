@@ -1,0 +1,16 @@
+---
+- name: Standalone ESXI playbook
+  gather_facts: no
+  hosts: localhost
+  vars_files:
+     - esxi_vars.yml
+  tasks:
+    - name: Enable and configure SNMP community
+      vmware_host_snmp:
+        hostname: '{{ esxi_hostname }}'
+        username: '{{ esxi_username }}'
+        password: '{{ esxi_password }}'
+        community: [ '{{ snmp_community }}' ]
+        state: enabled
+        validate_certs: no
+      delegate_to: localhost
