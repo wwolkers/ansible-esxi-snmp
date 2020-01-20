@@ -14,3 +14,10 @@
         state: enabled
         validate_certs: no
       delegate_to: localhost
+      
+    - name: Check SNMP is working on host
+      snmp_facts:
+        host: '{{ esxi_hostname }}'
+        version: v2c
+        community: '{{ snmp_community }}'
+      delegate_to: localhost
